@@ -20,7 +20,7 @@
   <!--
     Abschalten (Stress-CEO), Kampagnenseite im Apple-Stil, Stand 27.10.2026. Technik: app.js der Bauherren-Seite
     (Einwilligung, Messung, Zoho Web-to-Lead, Erfolgsanzeige, PLZ zur Ausstellung), abschalten.js (Einblenden,
-    Zeitwunsch in Description, Vorschau). Zoho: Webformular „Abschalten LP" mit Lead Source „Lead: Abschalten";
+    Zeitwunsch in Description, Vorschau). Zoho: Webformular „Probebaden LP" mit Lead Source „Lead: Probebaden";
     solange xnQsjsdp mit TODO beginnt, sendet app.js nichts und zeigt nur die Bestätigung.
     Vorschau: ?vorschau=danke, ?vorschau=formular, ?ohne=cookies.
   -->
@@ -29,19 +29,19 @@
 
 <header class="kopf" id="site-header">
   <a href="#top" aria-label="SPA Deluxe"><img class="logo" src="assets/logo-white.png" alt="SPA Deluxe" width="120" height="26" /></a>
-  <a href="#termin" class="knopf klein" data-cta="header-primary">Probebaden nach Feierabend</a>
+  <a href="#termin" class="knopf klein" data-cta="header-primary">Probebaden reservieren</a>
 </header>
 
 <!-- 1 · Hero -->
 <section class="bild" id="top" style="--pos:60% 50%">
-  <img class="bg" src="assets/bilder/haus-nacht.webp" alt="" width="1814" height="1820" fetchpriority="high" decoding="async" />
+  <img class="bg hero-bg" data-parallax src="assets/bilder/haus-nacht.webp" alt="" width="1814" height="1820" fetchpriority="high" decoding="async" />
   <div class="v"></div>
   <div class="wrap">
-    <p class="kicker sofort">Stilvoll abschalten</p>
-    <h1 class="sofort">Abschalten in 20 Minuten. Jeden Abend.</h1>
-    <p class="satz sofort">Vierzig Grad, Dampf in der kalten Luft, kein Telefon. Zwanzig Minuten, nach denen der Tag wieder scharf wird.</p>
-    <div class="zeile sofort">
-      <a href="#termin" class="knopf" data-cta="hero-primary">Probebaden nach Feierabend</a>
+    <p class="kicker sofort" style="--d:.05s">Stilvoll abschalten</p>
+    <h1 class="sofort" style="--d:.15s">Abschalten in 20 Minuten. Jeden Abend.</h1>
+    <p class="satz sofort" style="--d:.32s">Vierzig Grad, Dampf in der kalten Luft, kein Telefon. Zwanzig Minuten, nach denen der Tag wieder scharf wird.</p>
+    <div class="zeile sofort" style="--d:.46s">
+      <a href="#termin" class="knopf" data-cta="hero-primary">Probebaden reservieren</a>
       <span class="beleg">4,8 bei Google · über 560 Bewertungen · sechs Ausstellungen</span>
     </div>
   </div>
@@ -72,9 +72,9 @@
     <h2 class="gross reveal">Zehn Schritte vom Sofa.</h2>
     <p class="satz reveal">Keine Anreise, kein Hotel, kein Rückflug. Das Beste am Urlaub, jeden Abend, zu Hause.</p>
     <div class="zahlen reveal">
-      <div class="zahl"><strong>40</strong><span>Grad Wassertemperatur, im Winter wie im Sommer</span></div>
-      <div class="zahl"><strong>20</strong><span>Minuten, bis der Puls unten ist und der Kopf leer</span></div>
-      <div class="zahl"><strong>0</strong><span>Termine, Anrufe und Nachrichten in dieser Zeit</span></div>
+      <div class="zahl"><strong data-zaehler="40">0</strong><span>Grad Wassertemperatur, im Winter wie im Sommer</span></div>
+      <div class="zahl"><strong data-zaehler="20">0</strong><span>Minuten, bis der Puls unten ist und der Kopf leer</span></div>
+      <div class="zahl"><strong data-zaehler="0" data-von="12">12</strong><span>Termine, Anrufe und Nachrichten in dieser Zeit</span></div>
     </div>
   </div>
 </section>
@@ -96,9 +96,34 @@
     <h2 class="gross reveal">Probebaden nach Feierabend.</h2>
     <p class="satz reveal">Sie kommen nach der Arbeit in eine unserer sechs Ausstellungen, das Wasser ist warm, Ihr Berater lässt Sie in Ruhe. Allein oder zu zweit, im Modell Ihrer Wahl. Kostenlos, ohne Kaufzwang. Danach wissen Sie, ob Sie das jeden Abend wollen.</p>
     <div class="zeile reveal">
-      <a href="#termin" class="knopf hell" data-cta="probebaden-primary">Abend reservieren</a>
+      <a href="#termin" class="knopf hell" data-cta="probebaden-primary">Probebaden reservieren</a>
       <span class="beleg" style="color:rgba(0,0,0,.6)">Termin wird am Telefon abgestimmt</span>
     </div>
+  </div>
+</section>
+
+<!-- 7a · Ausstellungen -->
+<section class="orte-block" id="ausstellungen">
+  <img class="bg" src="assets/bilder/ausstellungen-hintergrund.jpg" alt="" width="2000" height="1000" loading="lazy" decoding="async" />
+  <div class="v"></div>
+  <div class="wrap">
+    <p class="kicker reveal">Wo Sie probebaden</p>
+    <h2 class="gross reveal">Sechs Ausstellungen. Fünf davon mit Probebaden.</h2>
+    <ol class="orte-liste reveal">
+      <li><span class="ort">Senden bei Münster</span><span class="tag">Probebaden</span></li>
+      <li><span class="ort">Hamburg</span><span class="tag">Probebaden</span></li>
+      <li><span class="ort">Rüsselsheim bei Frankfurt</span><span class="tag leise">Probesitzen</span></li>
+      <li><span class="ort">Esslingen bei Stuttgart</span><span class="tag">Probebaden</span></li>
+      <li><span class="ort">Fürth bei Nürnberg</span><span class="tag">Probebaden</span></li>
+      <li><span class="ort">Unterhaching bei München</span><span class="tag">Probebaden</span></li>
+    </ol>
+    <p class="satz reveal">Große Hallen, über 100 Modelle, teils befüllt und in Betrieb. In Rüsselsheim sitzen Sie Probe, in den anderen fünf Ausstellungen baden Sie Probe, nach Termin, auch nach Feierabend.</p>
+  </div>
+  <div class="streifen reveal" aria-label="Fotos aus den Ausstellungen">
+    <figure><img src="assets/bilder/ausstellung-senden-1.jpg" alt="Ausstellung Senden" loading="lazy" decoding="async" /><figcaption>Senden</figcaption></figure>
+    <figure><img src="assets/bilder/ausstellung-unterhaching-1.jpg" alt="Ausstellung Unterhaching" loading="lazy" decoding="async" /><figcaption>Unterhaching</figcaption></figure>
+    <figure><img src="assets/bilder/ausstellung-senden-2.jpg" alt="Ausstellung Senden" loading="lazy" decoding="async" /><figcaption>Senden</figcaption></figure>
+    <figure><img src="assets/bilder/ausstellung-unterhaching-2.jpg" alt="Ausstellung Unterhaching" loading="lazy" decoding="async" /><figcaption>Unterhaching</figcaption></figure>
   </div>
 </section>
 
@@ -112,24 +137,24 @@
       <span><b>Über 4.000</b> verkaufte Whirlpools</span>
       <span><b>Jacuzzi · Vortex Spas · Treesse · Fisher Spas</b></span>
     </div>
-    <p class="orte reveal">Ausstellungen in Senden bei Münster, Hamburg, Rüsselsheim bei Frankfurt, Esslingen bei Stuttgart, Fürth bei Nürnberg und Unterhaching bei München.</p>
+    <p class="orte reveal">Eigene Techniker in ganz Deutschland. Probebaden nach Termin in Senden, Hamburg, Esslingen, Fürth und Unterhaching.</p>
   </div>
 </section>
 
 <!-- 8 · Formular -->
 <section class="formular" id="termin" data-funnel="abschalten" data-pdf="" data-pdf-name="Abschalten Probebaden">
   <div class="wrap">
-    <h2 class="gross reveal">Ihren Abend reservieren.</h2>
+    <h2 class="gross reveal">Ihr Probebaden reservieren.</h2>
     <p class="satz reveal">Ihr Berater ruft Sie an und stimmt den Termin mit Ihnen ab. Zwei Minuten für Sie, der Rest ist ein Anruf.</p>
 
     <div class="form-box" id="lead-box">
       <div class="form-step" id="step-kontakt">
         <form id="lead-form" action="https://crm.zoho.eu/crm/WebToLeadForm" method="POST" target="zoho-lead-sink" accept-charset="UTF-8" novalidate>
-          <input type="hidden" name="xnQsjsdp" value="TODO-abschalten" />
-          <input type="hidden" name="xmIwtLD" value="TODO-abschalten" />
+          <input type="hidden" name="xnQsjsdp" value="f28d48c1a04ffcfc5a715ac5e2339dca16dcaeaff852becb36c75061ecadcff6" />
+          <input type="hidden" name="xmIwtLD" value="f833136635b31e46505a0e0ec492f274b5201330eb4d62287438bc7d4edfd412823209a94257f20344ccd245897169f3" />
           <input type="hidden" name="actionType" value="TGVhZHM=" />
           <input type="hidden" name="returnURL" value="https://ads.spadeluxe.de/abschalten/" />
-          <input type="hidden" name="Lead Source" value="Lead: Abschalten" />
+          <input type="hidden" name="Lead Source" value="Lead: Probebaden" />
           <input type="hidden" name="Description" id="lead-description" value="" />
           <input type="hidden" name="LEADCF157" data-attr="utm_source" data-max="100" />
           <input type="hidden" name="LEADCF156" data-attr="utm_medium" data-max="100" />
@@ -191,7 +216,7 @@
           </label>
           <p class="field-error" id="err-lead-consent" role="status" aria-live="polite"></p>
 
-          <button type="submit" class="knopf" id="lead-submit">Probebaden nach Feierabend</button>
+          <button type="submit" class="knopf" id="lead-submit">Probebaden reservieren</button>
         </form>
         <p class="form-foot">Lieber sofort sprechen? <a href="tel:+4925974753015">02597 4753015</a></p>
       </div>
@@ -201,7 +226,7 @@
       <div class="lead-success" id="lead-success" data-phase="prep" hidden>
         <div class="lead-prep">
           <div class="lead-prep-bar" aria-hidden="true"><span class="lead-prep-bar-fill"></span></div>
-          <p class="lead-prep-text" role="status">Ihr Abend wird reserviert …</p>
+          <p class="lead-prep-text" role="status">Ihr Probebaden wird reserviert …</p>
         </div>
         <div class="lead-done">
           <svg class="lead-check" viewBox="0 0 56 56" width="56" height="56" aria-hidden="true" focusable="false"><circle class="lead-check-bg" cx="28" cy="28" r="25" /><circle class="lead-check-ring" cx="28" cy="28" r="25" /><path class="lead-check-tick" d="M17 29.5l7.2 7.2L39.5 21" /></svg>

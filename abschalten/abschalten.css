@@ -102,3 +102,50 @@ h1{font-size:clamp(44px,9.2vw,124px);max-width:14ch}
 .btn.btn-primary{display:inline-flex;align-items:center;height:40px;padding:0 16px;border-radius:999px;background:#fff;color:#000;border:0;font:inherit;font-weight:700;font-size:13px;cursor:pointer}
 /* Nur für ganzseitige Bildschirmfotos (?shot=900): feste Bildschirmhöhe statt 100svh */
 body.shot .bild,body.shot .text{min-height:var(--shot,900px)}
+
+/* ---------- Bewegung (27.10.2026): Hero-Zoom, Parallax, Einzoomen beim Scrollen, gestaffelte Texte, Zaehler ---------- */
+.sofort{animation-delay:var(--d,.1s)}
+.hero-bg{transform-origin:50% 60%;animation:kenburns 14s cubic-bezier(.2,.6,.2,1) both;will-change:transform}
+@keyframes kenburns{from{transform:scale(1.12) translateY(0)}to{transform:scale(1.02) translateY(0)}}
+.bild img.bg:not(.hero-bg){transform:scale(1.12)}
+@supports (animation-timeline: view()){
+  .bild img.bg:not(.hero-bg){animation:einzoom linear both;animation-timeline:view();animation-range:entry 0% cover 55%}
+  @keyframes einzoom{from{transform:scale(1.16)}to{transform:scale(1.0)}}
+  .reveal{animation:aufscroll linear both;animation-timeline:view();animation-range:entry 0% entry 42%;opacity:1;transform:none;transition:none}
+  @keyframes aufscroll{from{opacity:0;transform:translateY(34px)}to{opacity:1;transform:none}}
+  .reveal.sichtbar{animation:aufscroll linear both;animation-timeline:view();animation-range:entry 0% entry 42%}
+}
+@supports not (animation-timeline: view()){
+  .bild img.bg:not(.hero-bg){transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+  .bild.sichtbar img.bg:not(.hero-bg){transform:scale(1.02)}
+}
+.text .wrap>*+*{transition-delay:.12s}
+.text .wrap>*+*+*{transition-delay:.24s}
+.text .wrap>*+*+*+*{transition-delay:.36s}
+/* Ausstellungen */
+.orte-block{position:relative;overflow:hidden;isolation:isolate;padding:clamp(80px,14vh,160px) 0 clamp(56px,8vh,96px)}
+.orte-block img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:.55}
+.orte-block .v{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#000 0%,rgba(0,0,0,.6) 30%,rgba(0,0,0,.6) 70%,#000 100%)}
+.orte-liste{list-style:none;margin-top:clamp(28px,5vh,56px);border-top:1px solid rgba(255,255,255,.18)}
+.orte-liste li{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:clamp(14px,2.2vh,22px) 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.orte-liste .ort{font-weight:800;font-size:clamp(22px,4vw,48px);letter-spacing:-.03em;line-height:1.05}
+.orte-liste .tag{flex-shrink:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#000;background:#fff;border-radius:999px;padding:7px 12px}
+.orte-liste .tag.leise{background:transparent;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.35)}
+.streifen{display:flex;gap:14px;margin-top:clamp(36px,6vh,64px);padding:0 var(--rand);overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.streifen::-webkit-scrollbar{display:none}
+.streifen figure{flex:0 0 min(78vw,520px);scroll-snap-align:start;margin:0;position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/3;background:#111}
+.streifen img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.streifen figure:hover img{transform:scale(1.05)}
+.streifen figcaption{position:absolute;left:14px;bottom:12px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:#fff;text-shadow:0 0 12px rgba(0,0,0,.6)}
+@media (min-width:900px){.streifen{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible;max-width:var(--max);margin-left:auto;margin-right:auto}.streifen figure{flex:none}}
+/* Kopf blendet beim Runterscrollen aus */
+.kopf{transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .4s}
+.kopf.weg{transform:translateY(-110%);opacity:0}
+@media (prefers-reduced-motion:reduce){.hero-bg,.bild img.bg{animation:none!important;transform:none!important}}
+
+/* ---------- Lesbarkeit im Hero (27.10.2026): Verlauf von links und unten, Text mit leichtem Schatten ---------- */
+#top .v{background:linear-gradient(90deg,rgba(0,0,0,.66) 0%,rgba(0,0,0,.36) 46%,rgba(0,0,0,.06) 100%),linear-gradient(180deg,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 28%,rgba(0,0,0,.18) 58%,rgba(0,0,0,.86) 100%)}
+.bild .kicker{color:rgba(255,255,255,.88);text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.bild h1,.bild h2{text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.bild .satz{color:rgba(255,255,255,.92);text-shadow:0 1px 14px rgba(0,0,0,.55)}
+.bild .beleg{text-shadow:0 1px 10px rgba(0,0,0,.5)}
