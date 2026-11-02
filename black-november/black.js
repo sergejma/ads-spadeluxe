@@ -18,14 +18,26 @@
   if (vorschau === 'danke') { try { sessionStorage.setItem('spa_lead_black-november', JSON.stringify({ first: 'Anna', funnel: 'black-november', ort: 'Senden bei Münster' })); } catch (e) {} }
   else if (vorschau === 'formular') { try { sessionStorage.removeItem('spa_lead_black-november'); } catch (e) {} }
 
-  // Fristen: Tage bis zum Aktionsende, Bestelltag für Weihnachten (jeweils Ende des Tages, Ortszeit)
+  // Fristen: Tage bis zum Aktionsende (Ende des Tages, Ortszeit); ?heute=JJJJ-MM-TT täuscht ein Datum vor (Vorschau)
+  const heuteParam = params.get('heute');
+  const jetzt = () => { if (heuteParam) { const [j, m, t] = heuteParam.split('-').map(Number); return new Date(j, m - 1, t, 12, 0, 0).getTime(); } return Date.now(); };
   const endeDesTages = (iso) => { const [j, m, t] = iso.split('-').map(Number); return new Date(j, m - 1, t, 23, 59, 59); };
-  const tageBis = (iso) => Math.ceil((endeDesTages(iso) - Date.now()) / 86400000);
+  const anfangDesTages = (iso) => { const [j, m, t] = iso.split('-').map(Number); return new Date(j, m - 1, t, 0, 0, 0); };
+  const tageBis = (iso) => Math.ceil((endeDesTages(iso) - jetzt()) / 86400000);
   document.querySelectorAll('[data-tage-bis]').forEach((el) => {
     const n = tageBis(el.dataset.tageBis);
-    if (n <= 0) el.textContent = el.dataset.vorbei || 'beendet';
-    else if (n === 1) el.textContent = el.dataset.einzahl || 'noch 1 Tag';
-    else el.textContent = (el.dataset.mehrzahl || 'noch {n} Tage').replace('{n}', String(n));
+    let text;
+    if (n <= 0) text = el.dataset.vorbei || 'beendet';
+    else if (n === 1) text = el.dataset.einzahl || 'noch 1 Tag';
+    else text = (el.dataset.mehrzahl || 'noch {n} Tage').replace('{n}', String(n));
+    el.textContent = text;
+    // Knappheit ab einem Stichtag: die Aussage wird zur Hauptzeile, die Resttage zur Beschriftung
+    const zeile = el.closest('[data-knapp-ab]');
+    if (zeile && n > 0 && jetzt() >= anfangDesTages(zeile.dataset.knappAb).getTime()) {
+      const label = zeile.querySelector('[data-knapp-label]');
+      if (label) label.textContent = text;
+      el.textContent = zeile.dataset.knappText || 'Nur noch wenige Modelle verfügbar';
+    }
   });
 
   // Einblenden: sofort, sobald ein Block ins Bild kommt
