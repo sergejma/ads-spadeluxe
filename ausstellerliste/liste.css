@@ -822,3 +822,5 @@
   .liste td:nth-child(4)::before { content: "Nachlass"; color: rgba(0,0,0,.55); font-size: .85rem; }
   .liste td:nth-child(5)::before { content: "Abverkaufspreis"; color: rgba(0,0,0,.55); font-size: .85rem; }
 }
+/* Zeile für den PDF-Link bleibt unsichtbar, solange keine Datei hinterlegt ist (hidden schlägt display:flex) */
+.ticket-zeile[hidden], .form-schritt[hidden] { display: none !important; }
