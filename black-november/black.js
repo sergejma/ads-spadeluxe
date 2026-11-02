@@ -9,6 +9,7 @@
   const still = reduziert || Boolean(shot);
   if (shot) {
     document.body.classList.add('shot');
+    document.documentElement.classList.remove('js');
     document.querySelectorAll('.reveal').forEach((el) => el.classList.add('sichtbar'));
     document.querySelectorAll('[data-summe]').forEach((el) => el.classList.add('fertig'));
     document.querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
