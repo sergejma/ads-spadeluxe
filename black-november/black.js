@@ -1,4 +1,4 @@
-/* Black November · Einblenden beim Scrollen, Wertstapel, Zähler, Fristen, Produkt im Hero, Wunschzeit in die Beschreibung, Vorschau. Läuft vor app.js. */
+/* Black November · Einblenden beim Scrollen, Wertstapel, Zähler, Resttage, Produkt im Hero, Wunschzeit in die Beschreibung, Vorschau. Läuft vor app.js. */
 (() => {
   'use strict';
   const params = new URLSearchParams(window.location.search);
@@ -27,9 +27,6 @@
     else if (n === 1) el.textContent = el.dataset.einzahl || 'noch 1 Tag';
     else el.textContent = (el.dataset.mehrzahl || 'noch {n} Tage').replace('{n}', String(n));
   });
-  const bestelltagVorbei = tageBis('2026-11-20') <= 0;
-  document.querySelectorAll('[data-vor-bestelltag]').forEach((el) => { el.hidden = bestelltagVorbei; });
-  document.querySelectorAll('[data-nach-bestelltag]').forEach((el) => { el.hidden = !bestelltagVorbei; });
 
   // Einblenden: sofort, sobald ein Block ins Bild kommt
   const io = ('IntersectionObserver' in window) ? new IntersectionObserver((es) => {
@@ -80,7 +77,7 @@
     leisteSetzen();
     if (produkt && !still) {
       const p = Math.min(1, y / (vh * 0.9));
-      produkt.style.transform = 'translateY(' + (y * 0.16) + 'px) rotateX(' + (26 - p * 14) + 'deg) scale(' + (1 + p * 0.06) + ')';
+      produkt.style.transform = 'translateY(' + (y * 0.18) + 'px) scale(' + (1 - p * 0.05) + ')';
       produkt.style.opacity = String(1 - p * 0.85);
     }
     if (!still) baender.forEach((bg) => {
