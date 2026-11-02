@@ -1,0 +1,824 @@
+/* ============================================================
+   Angebots-Check 2026 · Beratungstermin am Messestand
+   Ergänzt ../styles.css (Farben, Knöpfe, Formular, Erfolgsanzeige).
+   ============================================================ */
+
+/* ---------- Farbwelt dieser Seite: tiefes Grün als Akzent (Sergej, 13.10.2026) ---------- */
+.btn-primary { box-shadow: 0 4px 14px -4px rgba(30, 127, 92, 0.5); }
+.btn-primary:hover { box-shadow: 0 6px 18px -4px rgba(30, 127, 92, 0.6); }
+.saeule--eintritt::before { background: var(--color-ink); }
+
+/* ---------- Entwurfsleiste (nur im Entwurf) ---------- */
+.entwurf-leiste {
+  background: #FFF4D6;
+  color: #5C4300;
+  border-bottom: 1px solid #F0DCA0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  line-height: 1.45;
+  text-align: center;
+  padding: 7px 14px;
+}
+.entwurf-leiste[hidden] { display: none; }
+
+/* ---------- Hero: aufgeräumt wie eine Event-Anmeldeseite (Sergej, 13.10.2026) ---------- */
+.hero--messe { padding: 3.5rem 0 3rem; }
+.hero--messe .kicker {
+  margin: 0 0 1rem;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-slate);
+}
+.hero--messe h1 {
+  font-size: clamp(32px, 4.2vw, 52px);
+  max-width: 20ch;
+  margin-bottom: 1rem;
+}
+@media (max-width: 899px) {
+  .hero--messe .kicker { font-size: 12px; }
+}
+.hero--messe .hero-sub {
+  font-size: clamp(17px, 2vw, 20px);
+  max-width: 34ch;
+  margin-bottom: 1.5rem;
+}
+.hero-vorteile {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  gap: 0.55rem;
+}
+.hero-vorteile li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+.hero-vorteile .check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-action-bg);
+  color: var(--color-action);
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.hero--messe .cta-row { align-items: center; gap: 1.25rem; }
+.hero-link {
+  font-weight: 600;
+  color: var(--color-slate);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.hero-link::after { content: " →"; }
+.hero-link:hover { text-decoration: underline; }
+.hero-proof { margin: 1.1rem 0 0; font-size: 14px; color: var(--color-stone); }
+.hero-proof .stars { color: var(--color-gold); letter-spacing: 1px; margin-right: 0.2rem; }
+
+.hero--messe .hero-grid .hero-media .media-slot {
+  aspect-ratio: 4 / 3;
+  background: var(--color-sand);
+}
+.hero--messe .hero-media img { object-position: 42% 50%; }
+@media (min-width: 900px) {
+  .hero--messe .hero-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 3rem; }
+}
+@media (min-width: 1200px) {
+  .hero--messe .hero-grid { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 3.5rem; }
+}
+.media-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2rem 1rem 0.75rem;
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0) 0%, rgba(26, 26, 26, 0.6) 100%);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  line-height: 1.4;
+  pointer-events: none;
+}
+/* Eine Spalte: Kicker, Foto, Überschrift, Text, Vorteile, Knöpfe, Bewertung */
+@media (max-width: 899px) {
+  .hero-grid .kicker { order: 1; margin-bottom: 1rem; }
+  .hero-grid .hero-vorteile { order: 5; }
+  .hero-grid .cta-row { order: 6; }
+  .hero-grid .hero-proof { order: 7; }
+}
+
+/* Die Messe auf einen Blick */
+.messe-fakten {
+  margin: 2.5rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--color-sand-dark);
+  border: 1px solid var(--color-sand-dark);
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (min-width: 900px) {
+  .messe-fakten { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+.messe-fakten .fakt { background: #fff; padding: 1rem 1.25rem; margin: 0; min-width: 0; }
+.messe-fakten dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  margin-bottom: 0.3rem;
+}
+.messe-fakten dd {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-ink);
+  line-height: 1.35;
+}
+.messe-fakten dd small {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-stone);
+  margin-top: 2px;
+}
+@media (max-width: 480px) {
+  .messe-fakten .fakt { padding: 0.85rem 0.9rem; }
+  .messe-fakten dd { font-size: 15px; }
+}
+
+/* ---------- Ihre Reservierung: alles auf einen Blick ---------- */
+#reservierung .lead { max-width: 52ch; }
+.stack {
+  margin-top: 2rem;
+  background: #fff;
+  border: 1px solid var(--color-sand-dark);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  box-shadow: 0 24px 50px -30px rgba(26, 26, 26, 0.25);
+}
+.stack-liste { list-style: none; margin: 0; padding: 0; }
+.stack-liste li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: start;
+  padding: 0.95rem 0;
+  border-bottom: 1px dashed var(--color-sand-dark);
+}
+.stack-liste li:first-child { padding-top: 0.25rem; }
+.stack-check {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-action);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.stack-text strong { display: block; font-size: 17px; font-weight: 600; line-height: 1.35; color: var(--color-ink); }
+.stack-text span { display: block; font-size: 14.5px; line-height: 1.5; color: var(--color-stone); margin-top: 3px; }
+.stack-wert {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+  color: var(--color-action-dark);
+  background: var(--color-action-bg);
+  padding: 4px 10px;
+  border-radius: 99px;
+  margin-top: 2px;
+}
+.stack-summe {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--color-sand-dark);
+  border: 1px solid var(--color-sand-dark);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.stack-summe > div { background: var(--color-sand); padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 2px; }
+.stack-summe .k { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-stone); }
+.stack-summe .v { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 26px; line-height: 1.1; color: var(--color-ink); font-feature-settings: "tnum"; }
+.stack-summe > div:first-child .v { color: var(--color-action-dark); }
+.stack-cta { margin-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+.stack-cta .hinweis { font-size: 14px; color: var(--color-stone); }
+.stack-fussnote { margin: 1rem 0 0; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.5; color: var(--color-stone); }
+@media (max-width: 600px) {
+  .stack { padding: 1.25rem 1rem; }
+  .stack-liste li { grid-template-columns: 24px minmax(0, 1fr); gap: 0.7rem; }
+  .stack-wert { grid-column: 2; justify-self: start; margin-top: 0.35rem; }
+  .stack-cta .btn { width: 100%; }
+  .stack-summe .v { font-size: 22px; }
+}
+
+/* Im Formularkasten: Das ist drin */
+.form-inklusive { list-style: none; margin: 0 0 1.25rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.form-inklusive li {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-action-dark);
+  background: var(--color-action-bg);
+  border-radius: 99px;
+  padding: 5px 10px 5px 9px;
+}
+.form-inklusive li::before { content: "✓ "; }
+
+/* ---------- Am Stand: Fotos und Liste ---------- */
+.stand-galerie {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 2rem 0 0;
+}
+.stand-galerie figure { margin: 0; min-width: 0; }
+.stand-galerie .media-slot { aspect-ratio: 16 / 9; }
+@media (min-width: 720px) {
+  /* Zwei Fotos (22.10.2026): das Gruppenbild links, der Stand rechts, beide gleich hoch */
+  .stand-galerie {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .stand-galerie .media-slot { aspect-ratio: auto; height: 100%; min-height: 300px; }
+}
+.stand-liste {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: grid;
+  gap: 0.7rem;
+}
+.stand-liste li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 1.55;
+}
+.stand-liste .check {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-success);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+/* ---------- Messe-Paket: Angebotskarte mit großen Preisen ---------- */
+#paket .lead { max-width: 56ch; }
+.paket {
+  margin: 2rem 0 0;
+  background: linear-gradient(180deg, var(--color-slate) 0%, var(--color-slate-dark) 100%);
+  color: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: 0 32px 64px -32px rgba(26, 26, 26, 0.55);
+}
+@media (min-width: 900px) {
+  .paket { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); }
+}
+.paket-bild {
+  position: relative;
+  min-height: 240px;
+  background: var(--color-slate-dark);
+}
+.paket-bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% 42%;
+  display: block;
+}
+@media (max-width: 899px) {
+  .paket-bild { aspect-ratio: 16 / 10; min-height: 0; }
+}
+.paket-sticker {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: var(--color-action);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  padding: 10px;
+  transform: rotate(-8deg);
+  box-shadow: 0 14px 28px -10px rgba(0, 0, 0, 0.55), 0 0 0 4px rgba(255, 255, 255, 0.85);
+  line-height: 1.05;
+}
+.paket-sticker .gross {
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.paket-sticker .klein {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  opacity: 0.95;
+}
+.paket-inhalt { padding: 2rem 2rem 1.75rem; min-width: 0; }
+.paket-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.6rem;
+}
+.paket h3 {
+  color: #fff;
+  font-size: clamp(22px, 2.6vw, 28px);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.4rem;
+}
+.paket h3 .wert { color: #9FE3C0; white-space: nowrap; }
+.paket-liste { list-style: none; margin: 0; padding: 0; }
+.paket-liste li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.65rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+}
+.paket-liste .name { font-weight: 600; font-size: 16px; line-height: 1.35; color: #fff; }
+.paket-liste .name small {
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 2px;
+}
+.paket-liste .preis {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 19px;
+  font-feature-settings: "tnum";
+  white-space: nowrap;
+  color: #fff;
+}
+.paket-summe { margin-top: 1rem; }
+.paket-summe .zeile {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+.paket-summe .einzel { padding: 0.5rem 0 0.2rem; }
+.paket-summe .einzel .k { font-size: 14px; color: rgba(255, 255, 255, 0.7); }
+.paket-summe .einzel .v {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: line-through;
+  text-decoration-thickness: 3px;
+  text-decoration-color: #F2C14E;
+  font-feature-settings: "tnum";
+}
+.paket-summe .paket-preis .k { font-size: 17px; font-weight: 700; color: #fff; }
+.paket-summe .paket-preis .v {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: clamp(44px, 5.5vw, 60px);
+  line-height: 1;
+  color: #9FE3C0;
+  font-feature-settings: "tnum";
+  text-shadow: 0 6px 24px rgba(159, 227, 192, 0.25);
+}
+.paket-summe .paket-preis .v .eur { font-size: 0.55em; margin-left: 0.12em; }
+.paket-ersparnis {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: rgba(159, 227, 192, 0.14);
+  border: 1px solid rgba(159, 227, 192, 0.55);
+  color: #D8F5E6;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.paket-plus {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 3px solid #9FE3C0;
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+.paket-plus strong { color: #fff; }
+.paket-cta {
+  margin-top: 1.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+.paket-cta .hinweis { font-size: 13.5px; color: rgba(255, 255, 255, 0.72); line-height: 1.4; }
+.paket-fussnote {
+  margin: 1.1rem 0 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+}
+@media (max-width: 600px) {
+  .paket-inhalt { padding: 1.5rem 1.25rem 1.4rem; }
+  .paket-sticker { width: 108px; height: 108px; top: 12px; right: 12px; }
+  .paket-sticker .gross { font-size: 23px; }
+  .paket-cta .btn { width: 100%; }
+}
+
+/* ---------- Ablauf: vier Schritte ---------- */
+@media (min-width: 600px) {
+  .steps-grid--vier { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1000px) {
+  .steps-grid--vier { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem; }
+  .steps-grid--vier .step-card { padding: 1.5rem 1.35rem; }
+  .steps-grid--vier .step-card h3 { font-size: 18px; }
+  .steps-grid--vier .step-card p { font-size: 15px; }
+}
+
+/* ---------- Berater ---------- */
+#berater .lead { max-width: 56ch; margin-bottom: 0; }
+#berater .trust-team-block { margin-top: 2rem; }
+
+/* ---------- Zeitfenster ---------- */
+.slot-picker { margin: 0 0 1.5rem; }
+.slot-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+.slot-kopf label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0;
+}
+.slot-frei {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-success);
+  letter-spacing: 0.2px;
+}
+.slot-tage {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  margin: 0 -2px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.slot-tag {
+  flex: 0 0 auto;
+  min-width: 78px;
+  border: 1px solid var(--color-sand-dark);
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.55rem 0.6rem 0.5rem;
+  text-align: center;
+  font-family: inherit;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s, transform 0.15s var(--ease-out);
+}
+.slot-tag:hover { border-color: var(--color-stone); transform: translateY(-1px); }
+.slot-tag .wt { display: block; font-size: 12px; color: var(--color-stone); font-weight: 500; line-height: 1.3; }
+.slot-tag .dt { display: block; font-size: 16px; font-weight: 700; line-height: 1.3; font-feature-settings: "tnum"; }
+.slot-tag .fr {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: var(--color-success);
+  margin-top: 3px;
+}
+.slot-tag[aria-selected="true"] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: #fff;
+}
+.slot-tag[aria-selected="true"] .wt { color: rgba(255, 255, 255, 0.7); }
+.slot-tag[aria-selected="true"] .fr { color: #B9D9B0; }
+.slot-tag.ist-voll { opacity: 0.6; }
+.slot-tag.ist-voll .fr { color: var(--color-pebble); }
+.slot-tag:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
+
+.slot-zeiten {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+}
+@media (min-width: 540px) {
+  .slot-zeiten { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.slot-zeit {
+  border: 1.5px solid var(--color-sand-dark);
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.7rem 0.5rem 0.6rem;
+  text-align: center;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--color-ink);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+.slot-zeit .uhr { display: block; font-size: 17px; font-weight: 700; font-feature-settings: "tnum"; line-height: 1.2; }
+.slot-zeit .st {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.3px;
+  color: var(--color-success);
+  margin-top: 4px;
+}
+.slot-zeit:hover { border-color: var(--color-stone); }
+.slot-zeit:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
+.slot-zeit[aria-checked="true"] {
+  border-color: var(--color-action);
+  box-shadow: 0 0 0 2px var(--color-action);
+  background: #F0F8F3;
+}
+.slot-zeit.ist-knapp .st { color: var(--color-knapp); }
+.slot-zeit[disabled] {
+  cursor: not-allowed;
+  background: var(--color-sand);
+  color: var(--color-pebble);
+  border-style: dashed;
+}
+.slot-zeit[disabled]:hover { border-color: var(--color-sand-dark); }
+.slot-zeit[disabled] .uhr { text-decoration: line-through; text-decoration-color: var(--color-pebble); }
+.slot-zeit[disabled] .st { color: var(--color-pebble); }
+.slot-wahl {
+  margin: 0.9rem 0 0;
+  padding: 0.7rem 0.9rem;
+  background: var(--color-slate-bg);
+  border-left: 3px solid var(--color-slate);
+  border-radius: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-ink);
+}
+.slot-wahl:empty { display: none; }
+.slot-wahl strong { font-weight: 600; }
+.slot-picker.has-error .slot-zeiten { outline: 2px solid #B3261E; outline-offset: 4px; border-radius: 10px; }
+
+/* ---------- Interesse (Chips) ---------- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  border: 1px solid var(--color-sand-dark);
+  background: #fff;
+  border-radius: 99px;
+  padding: 8px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.chip:hover { border-color: var(--color-stone); }
+.chip[aria-pressed="true"] {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: #fff;
+}
+.chip:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
+
+/* ---------- Auswahlfeld wie die Eingabefelder ---------- */
+.field select {
+  width: 100%;
+  height: 48px;
+  padding: 0 2.4rem 0 0.85rem;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-ink);
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236B6B66' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.9rem center;
+  border: 1px solid var(--color-sand-dark);
+  border-radius: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field select:hover { border-color: var(--color-stone); }
+.field select:focus {
+  outline: none;
+  border-color: var(--color-action);
+  box-shadow: 0 0 0 2px var(--color-action);
+}
+/* Die Ausstellung zur PLZ zeigt app.js an. Auf der Messe-Seite irritiert das, der Vertrieb sieht sie in Zoho. */
+#hint-lead-plz { display: none; }
+
+/* ---------- Bestätigung: Eintrittskarte ---------- */
+.lead-prep { padding: 1.5rem 0; }
+.ticket {
+  width: 100%;
+  margin: 0 0 1.25rem;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--color-sand-dark);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -24px rgba(26, 26, 26, 0.35);
+}
+.ticket-kopf {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.1rem;
+  background: var(--color-ink);
+  color: #fff;
+}
+.ticket-kopf .t1 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+.ticket-kopf .t2 { font-size: 14px; font-weight: 600; text-align: right; }
+.ticket-zeile {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.1rem;
+  border-bottom: 1px dashed var(--color-sand-dark);
+  font-size: 15px;
+  line-height: 1.45;
+}
+.ticket-zeile:last-child { border-bottom: 0; }
+.ticket-zeile .k { color: var(--color-stone); flex-shrink: 0; }
+.ticket-zeile .v { font-weight: 600; text-align: right; }
+.ticket-aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  width: 100%;
+}
+.ticket-aktionen .btn { min-height: 46px; padding: 10px 18px; font-size: 15px; }
+@media (max-width: 480px) {
+  .ticket-kopf { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+  .ticket-kopf .t2 { text-align: left; }
+  .ticket-aktionen .btn { width: 100%; }
+}
+
+/* Berater am Stand (22.10.2026): zwei Portraits vor dem Gruppenbild */
+.berater-duo { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; max-width: 640px; }
+.berater-duo li { display: flex; align-items: center; gap: 0.9rem; background: var(--color-white, #fff); border: 1px solid var(--color-sand-dark, #e7e5df); border-radius: 14px; padding: 0.75rem; min-width: 0; }
+.berater-duo img { width: 76px; height: 76px; object-fit: cover; object-position: top; border-radius: 50%; flex: none; }
+.berater-duo strong { display: block; font-size: 15px; line-height: 1.3; }
+.berater-duo span { display: block; font-size: 13px; color: var(--color-stone, #6b6b73); line-height: 1.35; }
+@media (max-width: 600px) { .berater-duo { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- Vergleichstabelle: Ihr Angebot (Fragezeichen) neben SPA Deluxe (Haken) ---------- */
+.vgl { background: #fff; border: 1px solid var(--color-line, #E5E2DC); border-radius: 16px; overflow: hidden; margin-top: 1.75rem; }
+.vgl-kopf, .vgl-zeile { display: grid; grid-template-columns: 1.1fr 1.2fr 1.3fr; }
+.vgl-kopf { background: var(--color-ink, #1A1A1A); color: #fff; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; font-weight: 600; }
+.vgl-kopf span { padding: 12px 16px; }
+.vgl-kopf .vgl-wir { background: var(--color-action, #E8551A); }
+.vgl-zeile { border-top: 1px solid var(--color-line, #E5E2DC); }
+.vgl-zeile > div { padding: 14px 16px; font-size: 15px; line-height: 1.45; display: flex; gap: 10px; align-items: flex-start; min-width: 0; }
+.vgl-punkt strong { font-size: 16px; font-weight: 600; }
+.vgl-frage { color: var(--color-slate, #5B6470); }
+.vgl-zeile .vgl-wir { background: var(--color-action-bg, #FDEFE8); }
+.vgl-label { display: none; font-weight: 600; color: var(--color-ink, #1A1A1A); }
+.vgl-ikon { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
+.vgl-ikon.frage { color: var(--color-action, #E8551A); border: 2px solid var(--color-action, #E8551A); background: #fff; }
+.vgl-ikon.haken { background: var(--color-action, #E8551A); color: #fff; }
+@media (max-width: 719px) {
+  .vgl-kopf { display: none; }
+  .vgl-zeile { grid-template-columns: 1fr; }
+  .vgl-zeile > div { padding: 10px 14px; }
+  .vgl-punkt { padding-bottom: 2px; }
+  .vgl-frage { padding-top: 0; }
+  .vgl-label { display: inline; }
+}
+
+/* Fotos (02.11.2026): drei Bilder nach der Vergleichstabelle, ein breites Bild vor den Beratern */
+.fotos { padding: 2.5rem 0 0; }
+.foto-galerie { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; }
+@media (min-width: 720px) { .foto-galerie { gap: 1.25rem; } }
+.foto-galerie figure, .bild-band figure { margin: 0; min-width: 0; }
+.foto-galerie img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; background: #e9e6e1; }
+.galerie-zeile { display: none; margin: .7rem 0 0; font-size: .9rem; line-height: 1.45; color: rgba(0,0,0,.6); }
+/* Handy (02.11.2026, Sergej): drei Bilder nebeneinander in einer Reihe, keine gestapelte Galerie */
+@media (max-width: 719px) {
+  .foto-galerie img { aspect-ratio: 1 / 1; border-radius: 12px; }
+  .foto-galerie figcaption { display: none; }
+  .galerie-zeile { display: block; }
+}
+.foto-galerie figcaption, .bild-band figcaption { margin-top: .6rem; font-size: .9rem; line-height: 1.45; color: rgba(0,0,0,.6); }
+.bild-band { padding: 3rem 0 0; }
+.bild-band img { display: block; width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 60%; border-radius: 22px; background: #e9e6e1; }
+@media (max-width: 719px) { .bild-band img { aspect-ratio: 16 / 10; } }
+
+/* ============================================================
+   Ausstellerliste (02.11.2026): Beispielkarten, Listenvorschau, zwei Formularschritte
+   ============================================================ */
+.beispiel-karten { display: grid; grid-template-columns: 1fr; gap: 1rem; margin-top: 2rem; }
+@media (min-width: 820px) { .beispiel-karten { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; } }
+.beispiel { position: relative; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 20px; padding: 1.25rem 1.25rem 1.4rem; box-shadow: 0 10px 30px rgba(0,0,0,.05); display: flex; flex-direction: column; min-width: 0; }
+.beispiel-bild { aspect-ratio: 4 / 3; display: flex; align-items: center; justify-content: center; background: #f3f1ed; border-radius: 14px; overflow: hidden; }
+.beispiel-bild img { width: 92%; height: 92%; object-fit: contain; }
+.beispiel-badge { position: absolute; top: 1rem; right: 1rem; background: #1A1A1A; color: #fff; font-weight: 700; font-size: .95rem; padding: .4rem .7rem; border-radius: 999px; letter-spacing: .01em; }
+.beispiel h3 { font-size: 1.15rem; line-height: 1.25; margin: 1rem 0 .25rem; }
+.beispiel .zustand { font-size: .85rem; color: rgba(0,0,0,.6); margin: 0 0 .9rem; }
+.beispiel .preise { display: grid; grid-template-columns: 1fr auto; gap: .25rem .75rem; align-items: baseline; border-top: 1px solid rgba(0,0,0,.08); padding-top: .9rem; margin-top: auto; }
+.beispiel .preise dt { font-size: .85rem; color: rgba(0,0,0,.6); }
+.beispiel .preise dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.beispiel .preise .gross { font-size: 1.5rem; font-weight: 700; letter-spacing: -.01em; }
+.beispiel .preise .spar { color: #b3471c; font-weight: 600; }
+.beispiel-hinweis { margin-top: 1.25rem; font-size: .95rem; color: rgba(0,0,0,.65); }
+
+.liste-wrap { margin-top: 1.75rem; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid rgba(0,0,0,.08); border-radius: 18px; background: #fff; }
+.liste { width: 100%; border-collapse: collapse; font-size: .95rem; min-width: 720px; }
+.liste th, .liste td { padding: .8rem 1rem; text-align: left; vertical-align: top; border-bottom: 1px solid rgba(0,0,0,.07); }
+.liste th { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.55); font-weight: 600; background: #faf9f7; }
+.liste td.zahl, .liste th.zahl { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.liste .stueck { font-weight: 600; }
+.liste .klein { display: block; font-size: .82rem; color: rgba(0,0,0,.55); font-weight: 400; margin-top: .15rem; }
+.liste .nachlass { font-weight: 700; }
+.liste .preis-verdeckt { position: relative; display: inline-block; filter: blur(6px); user-select: none; color: rgba(0,0,0,.75); }
+.liste tr.beispiel-zeile .preis-verdeckt { filter: none; font-weight: 700; color: #1A1A1A; }
+.liste-fuss { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; justify-content: space-between; margin-top: 1rem; font-size: .9rem; color: rgba(0,0,0,.6); }
+.liste-cta { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; margin-top: 1.5rem; }
+
+.schritt-anzeige { display: inline-block; font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: rgba(0,0,0,.55); margin-bottom: .75rem; }
+.form-schritt[hidden] { display: none; }
+.schritt-gruss { font-size: .98rem; color: rgba(0,0,0,.72); margin: 0 0 1rem; }
+.schritt-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; margin-top: .5rem; }
+.btn-zurueck { background: none; border: 0; padding: 0; font: inherit; font-size: .9rem; color: rgba(0,0,0,.6); text-decoration: underline; cursor: pointer; }
+.btn-zurueck:hover { color: #1A1A1A; }
+.liste td:nth-child(2) { white-space: nowrap; }
+/* Handy: Tabelle als Karten je Stück, kein seitliches Scrollen */
+@media (max-width: 719px) {
+  .liste-wrap { overflow: visible; border: 0; background: none; }
+  .liste { min-width: 0; display: block; }
+  .liste thead { display: none; }
+  .liste tbody { display: grid; gap: .75rem; }
+  .liste tr { display: block; background: #fff; border: 1px solid rgba(0,0,0,.08); border-radius: 14px; padding: .9rem 1rem; }
+  .liste td { display: flex; justify-content: space-between; gap: 1rem; border: 0; padding: .2rem 0; text-align: left; }
+  .liste td:first-child { display: block; padding-bottom: .6rem; margin-bottom: .4rem; border-bottom: 1px solid rgba(0,0,0,.07); }
+  .liste td.zahl { white-space: normal; }
+  .liste td:nth-child(2)::before { content: "Maße in cm"; color: rgba(0,0,0,.55); font-size: .85rem; }
+  .liste td:nth-child(3)::before { content: "Listenpreis"; color: rgba(0,0,0,.55); font-size: .85rem; }
+  .liste td:nth-child(4)::before { content: "Nachlass"; color: rgba(0,0,0,.55); font-size: .85rem; }
+  .liste td:nth-child(5)::before { content: "Abverkaufspreis"; color: rgba(0,0,0,.55); font-size: .85rem; }
+}
