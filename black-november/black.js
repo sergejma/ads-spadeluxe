@@ -76,9 +76,10 @@
     if (kopf) kopf.classList.toggle('fest', y > 40);
     leisteSetzen();
     if (produkt && !still) {
-      const p = Math.min(1, y / (vh * 0.9));
-      produkt.style.transform = 'translateY(' + (y * 0.18) + 'px) scale(' + (1 - p * 0.05) + ')';
-      produkt.style.opacity = String(1 - p * 0.85);
+      const r = produkt.getBoundingClientRect();
+      const p = Math.min(1, Math.max(0, (vh * 0.18 - r.top) / (vh * 0.6)));
+      produkt.style.transform = 'translateY(' + (p * vh * 0.1) + 'px) scale(' + (1 - p * 0.05) + ')';
+      produkt.style.opacity = String(1 - p * 0.9);
     }
     if (!still) baender.forEach((bg) => {
       const r = bg.parentElement.getBoundingClientRect();
