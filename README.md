@@ -6,3 +6,4 @@ Kampagnenseiten der SPA Deluxe GmbH, je Aktion ein Ordner (zum Beispiel `/abscha
 |---|---|---|
 | abschalten/ | Abschalten (Stress-CEO), Schwarzweiß-Kampagne | Fassung 1 vom 27.10.2026 |
 | ausstellerliste/ | Ausstellerliste (Lead-Magnet, Liste der Einzelstücke per E-Mail), Formular in zwei Schritten | Fassung 1 vom 02.11.2026 |
+| black-november/ | Black November (Black Bundle im Wert von 1.695 € plus bis zu 30 % auf ausgewählte Modelle), eigene schwarze Handschrift mit Scroll-Animationen | Fassung 1 vom 02.11.2026, Entwurf ohne Zoho-Kennungen |
