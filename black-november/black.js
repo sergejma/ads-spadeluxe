@@ -65,7 +65,7 @@
   if (formular && 'IntersectionObserver' in window) {
     new IntersectionObserver((es) => { es.forEach((e) => { formularSichtbar = e.isIntersecting; leisteSetzen(); }); }, { threshold: 0.05 }).observe(formular);
   }
-  const leisteSetzen = () => { if (leiste) leiste.classList.toggle('da', window.scrollY > window.innerHeight * 0.9 && !formularSichtbar); };
+  const leisteSetzen = () => { const da = window.scrollY > window.innerHeight * 0.9 && !formularSichtbar; if (leiste) leiste.classList.toggle('da', da); document.body.classList.toggle('leiste-da', da); };
 
   // Produkt im Hero: beim Scrollen flacher, nach oben, ausblenden; Bildbänder: leichte Parallaxe ohne CSS-Scroll-Animationen
   const produkt = document.querySelector('[data-produkt]');
