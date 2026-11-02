@@ -17,12 +17,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="black.css?v=20261102d" />
+  <link rel="stylesheet" href="black.css?v=20261102e" />
   <script>document.documentElement.classList.add("js");</script>
   <!--
     Black November (Black Bundle), Kampagnenseite in eigener schwarzer Handschrift, Fassung 1 vom 02.11.2026 (Entwurf).
     Technik: app.js der Bauherren-Seite (Einwilligung, Messung, Zoho Web-to-Lead, Erfolgsanzeige, PLZ zur Ausstellung),
-    black.js (Einblenden beim Scrollen, Wertstapel, Zähler, Fristen, Wunschzeit in Description, Vorschau).
+    black.js (Einblenden beim Scrollen, Wertstapel, Zähler, Resttage, Wunschzeit in Description, Vorschau),
+    wasser.js (WebGL-Wasser im Becken, Sprudel, Dampf, Wellen bei Berührung; Maske assets/wasser-maske.png, Düsen als data-jets).
     Zoho: Webformular „Black November LP" mit Lead Source „Lead: Black November" (noch anzulegen);
     solange xnQsjsdp mit TODO beginnt, sendet app.js nichts und zeigt nur die Bestätigung.
     Vorschau: ?vorschau=danke, ?vorschau=formular, ?ohne=cookies, ?shot=900 (Bildschirmfoto: alles sichtbar, Zähler am Ziel).
@@ -53,7 +54,11 @@
     <p class="beleg sofort" style="--d:.5s">4,8 bei Google · über 560 Bewertungen · sechs Ausstellungen</p>
   </div>
   <div class="produkt" aria-hidden="true">
-    <img src="assets/vortex-palladium.png" alt="" width="900" height="750" fetchpriority="high" decoding="async" data-produkt />
+    <div class="produkt-innen" data-produkt data-wasser data-pool="assets/vortex-palladium.png" data-maske="assets/wasser-maske.png" data-jets='[[0.6964,0.1284],[0.2246,0.1292],[0.7444,0.1804],[0.5514,0.1821],[0.5967,0.1991],[0.7895,0.2045],[0.6417,0.2078],[0.545,0.2087],[0.4997,0.21],[0.7383,0.2472],[0.1174,0.255],[0.4211,0.2613],[0.1659,0.2662],[0.842,0.2949],[0.1204,0.3192],[0.1676,0.3257],[0.8929,0.3335],[0.8608,0.3467],[0.8319,0.3636],[0.9043,0.4928],[0.8721,0.4941],[0.1456,0.6245],[0.1019,0.6334],[0.8267,0.6347],[0.4159,0.6377],[0.36,0.6387],[0.871,0.6713],[0.7931,0.6777],[0.36,0.6827],[0.4167,0.684],[0.1449,0.6841],[0.3219,0.6849],[0.1016,0.6965],[0.8256,0.7067],[0.6451,0.7486],[0.6926,0.754],[0.2224,0.8091]]'>
+      <img src="assets/vortex-palladium.png" alt="" width="900" height="750" fetchpriority="high" decoding="async" />
+      <canvas class="wasser-gl"></canvas>
+      <canvas class="wasser-2d"></canvas>
+    </div>
   </div>
 </section>
 
@@ -305,7 +310,8 @@
   </div>
 </div>
 
-<script src="black.js?v=20261102d" defer></script>
+<script src="black.js?v=20261102e" defer></script>
+<script src="wasser.js?v=20261102e" defer></script>
 <script src="app.js?v=20261102a" defer></script>
 </body>
 </html>
